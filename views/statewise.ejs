@@ -1,0 +1,97 @@
+<%- include('includes/head.ejs')%>
+
+</head>
+
+<body>
+
+    <%- include('includes/navigation.ejs')%>
+        <div class="content-body">
+            <div class="container-fluid mt-3">
+               <div class="row">
+                    <div class="col-lg-3 mt-5">
+                      <form action="/post-state" method="POST">
+                        <div class="form-group">
+                          <select name="state" class="form-control">
+                                <option>Madhya Pradesh</option>
+                                <option>Gujarat</option>
+                                <option>Maharashtra</option>
+                                <option>Kerala</option>
+                                <option>Delhi</option>
+                                <option>Telangana</option>
+                                <option>Rajasthan</option>
+                                <option>Haryana</option>
+                                <option>Uttar Pradesh</option>
+                                <option>Ladakh</option>
+                                <option>Jammu and Kashmir</option>
+                                <option>Karnataka</option>
+                                <option>Punjab</option>
+                                <option>Andhra Pradesh</option>
+                                <option>Uttarakhand</option>
+                                <option>Odisha</option>
+                                <option>Puducherry</option>
+                                <option>West Bengal</option>
+                                <option>Chandigarh</option>
+                                <option>Chhattisgarh</option>
+                                <option>Himachal Pradesh</option>
+                                <option>Bihar</option>
+                                <option>Manipur</option>
+                                <option>Mizoram</option>
+                                <option>Goa</option>
+                                <option>Andaman and Nicobar Islands</option>
+                                <option>Jharkhand</option>
+                                <option>Assam</option>
+                                <option>Arunachal Pradesh</option>
+                                <option>Tripura</option>
+                                <option>Nagaland</option>
+                                <option>Meghalaya</option>
+                            </select>
+                      </div>
+                        <button type="submit" class="btn mb-1 ml-3 btn-flat btn-primary">Submit</button>
+                    </form>
+                    
+                    </div>
+                <% if(length > 0) { %>
+                    <div class="col-lg-9 mt-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4><%= state%></h4>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>S.no</th>
+                                                <th>District</th>
+                                                <th>Confirmed Cases</th>
+                                            </tr>
+                                        </thead>
+                                        <% { let count = 1  %>
+                                        <% for(let city of Object.keys(cities)){ %>
+                                        <tbody>
+                                            <tr>
+                                                <th><%= count %></th>
+                                                <th><%= city %> </th>
+                                                <td><%=cities[city].confirmed%></a>
+                                            </tr>
+                                        </tbody>
+                                       <%count+=1}} %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+                
+                  </div>
+                
+                
+            </div>
+                
+
+      <%- include('includes/end.ejs')%>
+            <!-- #/ container -->
+        </div>
+</body>
+
+</html>

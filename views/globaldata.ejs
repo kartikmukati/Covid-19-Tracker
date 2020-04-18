@@ -1,0 +1,67 @@
+<%- include('includes/head.ejs')%>
+
+</head>
+
+<body>
+
+    <%- include('includes/navigation.ejs')%>
+        <div class="content-body">
+
+            <div class="container-fluid mt-3">
+                <div class="row">
+                    <div class="col-lg-12 mt-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4>Global Data</h4>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>S.no</th>
+                                                <th>Country</th>
+                                                <th>Cases</th>
+                                                <th>Today Cases</th>
+                                                <th>Deaths</th>
+                                                <th>Today Deaths</th>
+                                                <th>Recovered</th>
+                                                <th>Active</th>
+                                                <th>Critical</th>
+                                                <th>CasesPerMillion</th>
+                                                <th>DeathsPerMillion</th>
+                                                <th>Tests</th>
+                                            </tr>
+                                        </thead>
+                                        <% { let count = 1 %>
+                                        <% for (let country of worldData){ %>
+                                        <tbody>
+                                            <tr>
+                                                
+                                                <th><%=count%></th>
+                                                <td><%=country.country%></a>
+                                                <td><%= country.cases%></td>
+                                                <td><%=country.todayCases%></td>
+                                                <td><%=country.deaths%></td>
+                                                <td><%=country.todayDeaths%></td>
+                                                <td><%=country.recovered%></td>
+                                                <td><%=country.active%></td>
+                                                <td><%=country.critical%></td>
+                                                <td><%=country.casesPerOneMillion%></td>
+                                                <td><%=country.deathsPerOneMillion%></td>
+                                                <td><%=country.tests%></td>
+                                            </tr>
+                                        </tbody>
+                                        <%count+=1 }} %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('includes/end.ejs')%>
+            <!-- #/ container -->
+        </div>
+</body>
+</html>

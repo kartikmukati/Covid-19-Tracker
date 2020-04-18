@@ -1,0 +1,162 @@
+
+<%- include('includes/head.ejs')%>
+</head>
+<body>
+   <%- include('includes/navigation.ejs')%>
+        <div class="content-body">
+            <div class="container-fluid mt-3">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-1">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Infected</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white"><%=confirmed %></h2>
+                                    <p class="text-white mb-0">Active cases of Covid-19</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-globe"></i></span>
+                                <span class="text-nowrap"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-2">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Recovered</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white"><%= recovered%></h2>
+                                    <p class="text-white mb-0">Recoveries from Covid-19</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-recycle"></i></span>
+                                <span class="text-nowrap"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-3">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Deaths</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white"><%= death%></h2>
+                                    <p class="text-white mb-0">Deaths caused by</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-heartbeat"></i></span>
+                                <span class="text-nowrap">Covid-19</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-4">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Last Update</h3>
+                                <p class="text-white mb-0"><%=lastUpdate %></p>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white"></h2>
+                                    <h3 class="card-title text-white">Time</h3>
+                                    <p class="text-white mb-0"><%=time %></p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-clock-o"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3 mt-5">
+                      <form action="\post-country" method="POST">
+                        <div class="form-group">
+                          <select name="country" class="form-control">
+                                <option>India</option>
+                                <option>USA</option>
+                                <option>Italy</option>
+                                <option>Australia</option>
+                                <option>Bangladesh</option>
+                                <option>Bhutan</option>
+                                <option>Brazil</option>
+                                <option>Canada</option>
+                                <option>China</option>
+                                <option>France</option>
+                                <option>Germany</option>
+                                <option>Iraq</option>
+                                <option>Israel</option>
+                                <option>Japan</option>
+                                <option>Nepal</option>
+                                <option>Pakistan</option>
+                                <option>Philippines</option>
+                                <option>Russia</option>
+                                <option>Saudi Arabia</option>
+                                <option>Singapore</option>
+                                <option>Sri Lanka</option>
+                                <option>Taiwan</option>
+                                <option>Thailand</option>
+                                <option>United Arab Emirates</option>
+                                <option>United Kingdom</option>
+                            </select>
+                      </div>
+                        <button type="submit" class="btn mb-1 btn-flat btn-primary">Submit</button>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                    <div class="col-lg-8 mb-3">
+                                        <canvas id="mychart"></canvas>
+                                    </div>
+                                
+                                <script>
+                                    let mychart = document.getElementById('mychart').getContext('2d')
+                                    Chart.defaults.global.defaultFontFamily = 'Lato'
+                                    Chart.defaults.global.defaultFontSize = 8
+                                    Chart.defaults.global.defaultFontColor = '#777'
+
+                                    let confirmed = "<%= confirmedG%>" 
+                                    let recovered = "<%=recoveredG %>" 
+                                    let death =  "<%= deathG%>"
+                                    let massPopChart = new Chart(mychart,{
+            
+                                    type:'horizontalBar',
+                                    data:{
+                                        labels:['Confirmed','Recovered','Deaths'],
+                                        datasets:[{
+                                            label:'Confirmed',
+                                            data:[
+                                                confirmed,
+                                                recovered,
+                                                death
+                                            ],
+                                            backgroundColor:[
+                                                '#9966ff',
+                                                '#ff6699',
+                                                '#ff6633'
+                                            ],  
+                                           
+                                        }]
+                                    },
+                                    options:{
+                                        responsive:true,
+                                        title:{
+                                            display:true,
+                                            text:'Global Data of Coronavirus Pandemic',
+                                            fontSize:15
+                                        },
+                                        legend:{
+                                            display:false,
+                                            position:'right'
+                                        }
+                                    }
+                            })
+                          </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('includes/end.ejs')%>
+
+</body>
+</html>

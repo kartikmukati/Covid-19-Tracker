@@ -1,0 +1,111 @@
+<%- include('includes/head.ejs')%>
+
+</head>
+
+<body>
+
+    <%- include('includes/navigation.ejs')%>
+        <div class="content-body">
+
+            <div class="container-fluid mt-3">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mt-0">
+                        <div class="card card-widget">
+                            <div class="card-body">
+                                <h5 class="text-muted">Situation in </h5>
+                                <h2 class="mt-4"><%=countryName%></h2>
+                                <span>Covid-19 update</span>
+                                <div class="mt-4" >
+                                    <h5>Infected</h5>
+                                    <h6><%=confirmed%></h6>
+                                </div>
+                                <div class="mt-4">
+                                    <h5>Recovered</h5>
+                                    <h6><%= recovered%></h6>
+                                    <h6 class="m-t-10 text-muted">Recovery % <span class="pull-right"><%=recoveredP%>%</span></h6>
+                                    <div class="progress mb-3" style="height: 7px">
+                                        <div id="recover" class="progress-bar bg-success" style="width:0%;" role="progressbar"><span class="sr-only">50% Order</span>
+                                        <script>
+                                            document.getElementById('recover').style.width = "<%=recoveredP%>%"
+                                        </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <h5>Deaths</h5>
+                                    <h6><%= deaths%></h6>
+                                    <h6 class="m-t-10 text-muted">Death % <span class="pull-right"><%=deathP%>%</span></h6>
+                                    <div class="progress mb-3" style="height: 7px">
+                                        <div id="death" class="progress-bar bg-warning" style="width: 20%;" role="progressbar"><span class="sr-only">20% Order</span>
+                                        <script>
+                                            document.getElementById('death').style.width = "<%=deathP%>%"
+                                        </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-lg-9 mb-3">
+                                    <canvas id="mychart"></canvas>
+                                </div>
+                                
+                                <script>
+                                    let mychart = document.getElementById('mychart').getContext('2d')
+                                    Chart.defaults.global.defaultFontFamily = 'Lato'
+                                    Chart.defaults.global.defaultFontSize = 8
+                                    Chart.defaults.global.defaultFontColor = '#777'
+
+                                    let confirmed = "<%= confirmedG%>" 
+                                    let recovered = "<%=recoveredG %>" 
+                                    let death =  "<%= deathG%>"
+                                    let massPopChart = new Chart(mychart,{
+            
+                                    type:'bar',
+                                    data:{
+                                        labels:['Confirmed','Recovered','Deaths'],
+                                        datasets:[{
+                                            label:'Confirmed',
+                                            data:[
+                                                confirmed,
+                                                recovered,
+                                                death
+                                            ],
+                                            backgroundColor:[
+                                                '#9966ff',
+                                                '#ff6699',
+                                                '#ff6633'
+                                            ],  
+                                           
+                                        }]
+                                    },
+                                    options:{
+                                       title:{
+                                            display:true,
+                                            text:'Covid-19 Outbreak',
+                                            fontSize:15
+                                        },
+                                        legend:{
+                                            display:false,
+                                            position:'right'
+                                        }
+                                    }
+                                })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                       
+                
+        <%- include('includes/end.ejs')%>
+            <!-- #/ container -->
+        </div>
+       
+</body>
+
+</html>
